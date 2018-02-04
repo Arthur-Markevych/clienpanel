@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2><i class="fa fa-users"></i>Clients</h2>  
+  </div>
+  <div class="col-md-6">
+    <h5 class="pull-right text-muted">Total owed: {{totalOwed | currency:"USD"}}</h5>
+  </div>
+</div>
+<ng-container *ngIf="(clients | async) || {} as Client; else noClients">
+<table class="table table-striped" >
+<thead class="thead-inverse">
+  <tr>
+    <th (click)="orderBy('id')" >ID</th>
+    <th (click)="orderBy('firstName')" >Name</th>
+    <th (click)="orderBy('email')" >Email</th>
+    <th (click)="orderBy('balance')" >Balance</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let client of clients | async">
+    <td>{{client.id}}</td>
+    <td>{{client.firstName}} {{client.lastName}}</td>
+    <td>{{client.email}}</td>
+    <td>{{client.balance | currency:"USD"}}</td>
+    <td><a [routerLink]="['/client/' + client.id]" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Ditails</a></td>
+  </tr>
+</tbody>
+</table>
+</ng-container>
+<ng-template #noClients>
+  <hr>
+  <h5>There no clients in the system</h5>
+</ng-template>
+

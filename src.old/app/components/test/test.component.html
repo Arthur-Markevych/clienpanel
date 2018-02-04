@@ -1,0 +1,16 @@
+<div class="container">
+  <br><br>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of items | async">
+    {{ item.firstName }}
+    {{ item.lastName }}
+    {{ item.phone }}
+    {{ item.email }}
+    id: {{ item.id }}
+  </li>
+</ul>
+<hr>
+</div>
+<div class="container" *ngIf="items.length < 0">
+  <div class="alert-danger">There are no clients</div>
+</div>
